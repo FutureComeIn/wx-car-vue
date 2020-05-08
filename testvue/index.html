@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>testvue</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <style>
+      .class1{color:red}
+  </style>
+</head>
+<body>
+    <div id="app"></div>
+    <a href="/page1/index" rel="external nofollow" >to page B</a>
+    <a href="/page2/index" rel="external nofollow" >to page C</a>
+    <a href="/page3/index" rel="external nofollow" >to page D</a>
+    <a href="/shoppingcart/index" rel="external nofollow" >购物车</a>
+    <a href="/todolist/index" rel="external nofollow" >小目标</a>
+    <!-- built files will be auto injected -->
+    <div id="vue_det">
+      <h1>site : {{site}}</h1>
+      <h1>url : {{url}}</h1>
+      <h1>{{details()}}</h1>
+      <!-- 使用 v-html 指令用于输出 html 代码 -->
+      <div v-html="message"></div>
+      <!--v-model 指令在表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值
+          修饰符 ： .lazy ->转变为输入完毕后再变化message值，而不是边输入变变化 ;
+             .number ->输入值转为 Number 类型;  .trim ->过滤用户输入的首尾空格
+      -->
+      <p><input v-model.lazy="message" placeholder="双向数据绑定测试"></p>
+      <div>
+        <p>单个复选框：</p>
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+        <p>多个复选框：</p>
+        <input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames">
+        <label for="runoob">Runoob</label>
+        <input type="checkbox" id="google" value="Google" v-model="checkedNames">
+        <label for="google">Google</label>
+        <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames">
+        <label for="taobao">taobao</label>
+        <br>
+        <span>选择的值为: {{ checkedNames }}</span>
+        <p>单选按钮：</p>
+        <input type="radio" id="runoob" value="Runoob" v-model="picked">
+        <label for="runoob">Runoob</label>
+        <br>
+        <input type="radio" id="google" value="Google" v-model="picked">
+        <label for="google">Google</label>
+        <br>
+        <span>选中值为: {{ picked }}</span>
+        <br><br>下拉列表框:
+        <select v-model="selected" name="fruit">
+          <option value="">选择一个网站</option>
+          <option value="www.runoob.com">Runoob</option>
+          <option value="www.google.com">Google</option>
+        </select>
+        <span>选择的网站是: {{selected}}</span>
+      </div>
+
+      <!-- HTML属性中的值使用 v-bind ，实例判断 bind_class 的值，如果为 true 使用 class1 类的样式，否则不使用该样式-->
+      <div v-bind:class="{'class1': bind_class}">v-bind:class指令</div>
+      <pre><a v-bind:href="url">菜鸟教程</a></pre>
+      <pre><a v-on:click="doSomething">v-on介绍</a></pre>
+      <!--缩写:
+          完整语法<a v-bind:href="url"></a>         -> <a :href="url"></a>
+                  <a v-on:click="doSomething"></a>  -> <a @click="doSomething"></a>
+      -->
+
+      <!--修饰符是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定
+          Vue中关于v-on的事件修饰符( https://www.jianshu.com/p/7ccae66dd2b8 )
+          .prevent: 提交事件不再重载页面
+      -->
+      <form v-on:submit.prevent="onSubmit">
+        <input type="button" value="我是form"/>
+        <!--按键修饰符 .enter : 回车时触发-->
+        <input v-on:keyup.enter="submit" value="按enter键触发">
+        <!-- 缩写语法：<input @keyup.enter="submit"> -->
+      </form>
+
+      <!--自定义过滤器，被用作一些常见的文本格式化。由"管道符"指示
+          过滤器可以串联：{{ message | filterA | filterB }}
+          过滤器接受参数：{{ message | filterA('arg1', arg2) }}
+          message 是第一个参数，字符串 'arg1' 作为第二个参数， arg2 表达式的值将被求值然后传给过滤器作为第三个参数-->
+      {{ url | capitalize }}
+      <!-- 在 v-bind 指令中 <div v-bind:id="rawId | formatId"></div>   -->
+
+
+      <p v-if="type==='A'">现在你看到我了A</p>
+      <p v-else-if="type==='B'">现在你看到我了B</p>
+      <p v-else>现在你看到我了C</p>
+      <!-- Handlebars 模板 : [HMR] Waiting for update signal from WDS...
+      {{#if seen}}
+          <p>现在你看到我了too</p>
+      {{/if}}  -->
+      <p v-show="show_ok">v-show也可做条件判断</p>
+
+      <!--循环 v-for  （v-for="n in 10" ，可以直接迭代整数） -->
+      <ol>
+        <li v-for="site in sites">
+          {{ site.name }}
+        </li>
+      </ol>
+      <!--模板中使用 v-for-->
+      <ul>
+        <template v-for="site in sites">
+          <li>{{ site.name }}</li>
+          <li>--------------</li>
+        </template>
+      </ul>
+      <!--通过一个对象的属性来迭代数据，也可以随意添加索引（从0开始）、键名显示-->
+      <ul>
+        <li v-for="(value, key, index) in object">
+          {{ index }}. {{ key }} : {{ value }}
+        </li>
+      </ul>
+      <!-- split: 将字符串按给的参数分割成数组，且数组中剔除掉分割参数；   reverse: 只能对数组起作用
+           join:  把数组中的所有元素放入一个字符串，通过给的参数分隔 -->
+      <p>{{msg.split('').reverse().join('')}}</p>
+
+      <!--计算属性 ：computed 的get 、set 属性 ( 调用setter，vm.object.name 和 vm.object.url 也会被对应更新 ) -->
+      <!--监听属性:watch  -->
+      <p style = "font-size:25px;">计数器: {{ counter }}</p>
+      <button @click = "counter++" style = "font-size:25px;">点我</button>
+      <div>
+          千米 : <input type = "text" v-model = "kilometers">
+          米 : <input type = "text" v-model = "meters">
+          <p id="info"></p>
+      </div>
+
+    </div>
+</body>
+
+<script>
+  var vm =new Vue({
+    el: '#vue_det',
+    data: {
+      site: "菜鸟教程",
+      url: "www.runoob.com",
+      alexa: "10000",
+      message: '<h1>菜鸟</h1>',
+      msg:'abc',
+      bind_class : true,
+      url:'http://www.runoob.com',
+      type: 'A',
+      show_ok:true,
+      sites: [
+        { name: 'Runoob' },
+        { name: 'Google' },
+        { name: 'Taobao' }
+      ],
+      object: {
+        name: '菜鸟教程',
+        url: 'http://www.runoob.com',
+        slogan: '学的不仅是技术，更是梦想！'
+      },
+      counter:1,
+      kilometers : 0,
+      meters:0,
+      checked : false,
+      checkedNames: [],
+      picked : 'Runoob',
+      selected: ''
+    },
+    methods: {
+      details: function () {
+        return this.site + " - 学的不仅是技术，更是梦想！";  //函数通过return 返回函数值
+      },
+      doSomething:function(){
+        alert("v-on 指令，它用于监听 DOM 事件");
+      },
+      onSubmit:function(){
+        alert("onSubmit");
+      }
+    },
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    },
+    computed: {
+      site: {
+        // getter
+        get: function () {
+          return this.object.name + ' ' + this.object.url
+        },
+        // setter
+        set: function (newValue) {
+          var names = newValue.split(' ')
+          this.object.name = names[0]
+          this.object.url = names[names.length - 1]
+        }
+      }
+    },
+    watch : {
+      kilometers:function(val) {
+        this.kilometers = val;
+        this.meters = this.kilometers * 1000
+      },
+      meters : function (val) {
+        this.kilometers = val/ 1000;
+        this.meters = val;
+      }
+    }
+
+  });
+  //加前缀 $ 直接可以获取veu对象的实例属性
+  document.write(vm.$el === document.getElementById('vue_det')); // true
+
+  vm.$watch('counter', function(nval, oval) {
+     alert('计数器值的变化 :' + oval + ' 变为 ' + nval + '!');
+  });
+  vm.$watch('kilometers', function (newValue, oldValue) {
+    // 这个回调将在 vm.kilometers 改变后调用,且删掉值时才显示正确
+    document.getElementById ("info").innerHTML = "修改前值为: " + oldValue + "，修改后值为: " + newValue;
+  })
+</script>
+
+</html>

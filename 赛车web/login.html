@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>喜马拉雅赛车论坛登录界面</title>
+    <style type="text/css">
+	    label{font-size:12px;color:red;}
+	</style>
+    <script language="javascript">
+	   function checkName()
+	   {
+		   var username=document.getElementById("userid").value;
+		   if(username.length==0)
+		   {
+			   document.getElementById("userlabel").innerHTML="请输入用户名";
+			   document.getElementById("userid").focus();  //获取光标
+			   return false;
+		   }
+		   else
+		   {
+			   document.getElementById("userlabel").innerHTML="";
+			   return true;
+		   }
+	   }
+	   function checkPsw()
+	   {
+		   var psw=document.getElementById("pswid").value;
+		   if(psw.length==0)
+		   {
+			   document.getElementById("pswlabel").innerHTML="请输入密码";
+			   return false;
+		   }
+		   else
+		   {
+			   document.getElementById("pswlabel").innerHTML="";
+			   return true;
+		   }
+	   }
+	   
+	   function checkData()
+	   {
+		   if(checkName()&&checkPsw())
+		   {
+			   alert("登录成功,请您完善地址信息!");
+			   window.showModalDialog("address.html","补充地址","dialogWidth:700px;dialogHeight:600px;");
+			   close();
+			   //return true;
+		   }
+		   else
+		   {
+			   return false;
+		   }
+	   }
+	</script>
+</head>
+
+<body>
+    <div style="width:500px;height:300px;margin:0 auto;background-image:url(image/sltbg.jpg)">
+       <form method="post" action="#" onSubmit="return checkData()">
+          <table width="60%" height="300px">
+             <tr bgcolor="#FFCCCC">
+                <td colspan="22">喜马拉雅赛车论坛</td>
+             </tr>
+             <tr> 
+                <td align="right">用户名:</td>
+                <td>
+          <input type="text" id="userid" name="user" onBlur="checkName()" />
+          		<label id="userlabel"> </label>  <br/>
+                </td>
+             </tr>
+             <tr>
+                <td align="right">密&nbsp;&nbsp;&nbsp;码:</td>
+                <td>
+           <input type="password" id="pswid" name="psw" onBlur="checkPsw()"/>
+             <label id="pswlabel"> </label> <br/>
+                </td>
+             </tr>
+             <tr>
+                <td colspan="2" align="center"> 
+                   <input type="submit" value="登录" name="sub"/>
+                </td>
+             </tr>
+          </table>
+    </form> 
+    </div>
+</body>
+</html>

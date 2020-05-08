@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>新增入口3</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+   <!--多页面配置：https://github.com/Fatty-Shu/vue-multi-entry-->
+  <div id="app"></div>
+   <div id="app2">
+     <input type="button" @click="get()" value="点我异步获取数据(Get)">
+     <input type="button" @click="post()" value="点我异步获取数据(Post)">
+     <div>
+       请输入关键字：<input type="text" v-model="keyword" @keyup="sendJsonP(keyword)">
+       <ul>
+         <li v-for="r in result">{{r}}</li>
+       </ul>
+     </div>
+     <div>
+       <p>Vue.js 响应接口【在运行过程中实现属性的添加或删除：Vue.set 和 Vue.delete 】</p>
+     </div>
+     </div>
+   </div>
+</body>
+<script>
+  var myproduct = {"id":1, name:"book", "price":"20.00"};
+  var vm = new Vue({
+    el: '#app2',
+    data: {
+      keyword: '',
+      result: '',
+      products: myproduct
+    },
+    methods: {
+      get: function () {
+        //发送get请求
+        this.$http.get('/test.txt').then(function (res) {
+          document.write(res.body);
+        }, function () {
+          console.log('请求失败处理');
+        });
+      },
+      post:function(){
+        //发送 post 请求
+        this.$http.post('/test.php',{name:"菜鸟教程",url:"http://www.runoob.com"},{emulateJSON:true}).then(function(res){
+          document.write(res.body);
+        },function(res){
+          console.log(res.status);
+        });
+      },
+      sendJsonP(keyword) {
+        let url = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web';
+        this.$http.jsonp(url, {
+          params: {
+            wd: keyword
+          },
+          jsonp: 'cb'//jsonp默认是callback,百度缩写成了cb，所以需要指定下                     }
+        }).then(res => {
+          if (res.data.g) {
+            this.result = res.data.g.map(x => x['q']);
+          } else {
+            this.result = [];
+          }
+        });
+      }
+    },
+    mounted:function(){
+      //另一种添加属性写法：$set
+      this.$set(myproduct,'qy3', 1)
+    }
+  });
+  vm.products.qty = "1";  //products添加属性 qty(这样添加，get/set 方法只可用于 id，name 和 price 属性)
+  Vue.set(myproduct, 'qty2', 1);  //添加，qty2有get/set 方法
+  Vue.delete(myproduct, 'price');
+  console.log(vm);
+</script>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC >
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 	<title>喜马拉雅,开启逼格</title>
+    <style>
+		.div{width:800px;margin:0px auto;background-color:#5a6b7b;}
+		a.m1:link{color:#defe5f;text-decoration:none;font-size:15px;}
+		a.m1:hover{color:#C03;font-size:10px;text-decoration:underline;cursor:pointer;font-size:15px;}
+		.company-hide{display:none;position:absolute;z-index:6;}
+		a.m2:link{font-size:30px;color:#f9fcff;text-decoration:none;}
+		a.m3:link{font-size:30px;color:#f9fcff;text-decoration:none;}  
+		a.m2:hover{font-size:30px;color:red;cursor:pointer;background-color:red;}
+		a.m3:hover{font-size:30px;color:#f9fcff;cursor:pointer;background-color:#d4dfe5;}
+		a.m2:active{font-size:30px;color:red;cursor:pointer;}
+		a.m2:visited{font-size:30px;color:#f9fcff;text-decoration:underline;}
+		a.m3:visited{font-size:30px;color:#f9fcff;text-decoration:none;}
+		.numdv{position:relative;left:190px;top:-30px;}
+		.itemdv{width:40px;display:inline;margin:15px;cursor:pointer;
+		  font-size:24px;color:red;item_0}
+	</style>
+    <script language="javascript">
+	  //系统时间-----------------------------------------------
+	  function get_time()
+	  {
+	   var time=new Date();  //获取当前系统时间函数new Data()
+	   var year=time.getFullYear();
+	   var month=time.getMonth()+1;
+	   var day=time.getDate();
+	   
+	   var hour=time.getHours();
+	   var minute=time.getMinutes();
+	   var sec=time.getSeconds();
+	   
+	   var strTime=year+"年"+month+"月"+day+"日"+hour+":"+minute+":"+sec;
+	   
+	   document.timeForm.time.value=strTime;
+	   
+	   window.setTimeout("get_time()",1000);
+	  }
+	  window.onload=get_time;
+	   //div隐藏于显示------------------------------------------------
+   function showmenu1()
+   {
+	   document.getElementById("s1").style.display="block";
+	   document.getElementById("s2").style.display="none";
+	   document.getElementById("s3").style.display="none";
+   }
+   function showmenu2()
+   {
+	   document.getElementById("s1").style.display="none";
+	   document.getElementById("s2").style.display="block";
+	   document.getElementById("s3").style.display="none";
+   }
+   function showmenu3()
+   {
+	   document.getElementById("s1").style.display="none";
+	   document.getElementById("s2").style.display="none";
+	   document.getElementById("s3").style.display="block";
+   }
+   function showmenu4()
+   {
+	   document.getElementById("s1").style.display="none";
+	   document.getElementById("s2").style.display="none";
+	   document.getElementById("s3").style.display="none";
+   }
+   function showmenu5()
+   {
+	   document.getElementById("s1").style.display="none";
+	   document.getElementById("s2").style.display="none";
+	   document.getElementById("s3").style.display="none";
+   }
+   //图片轮播--------------------------------------------------------------
+   		 var imgArray=new Array();
+		 imgArray[0]="image/1.jpg";
+		 imgArray[1]="image/2.jpg";
+		 imgArray[2]="image/3.jpg";
+		 imgArray[3]="image/4.jpg";
+		 imgArray[4]="image/5.jpg";
+		 var i=1;  //i=0
+       //第一个函数：图片轮播 和 出现对应背景色
+		 function show_img()
+		 {
+			 var imgObj=document.getElementById("img");
+			 imgObj.src=imgArray[i];
+			 //获取所有图片对应数字
+			 var itemArray=document.getElementsByName("itemdv");
+			 for(var j=0;j<itemArray.length;j++)
+			 {
+				 if(j==i)
+				 {
+					 itemArray[j].style.backgroundColor="gray";
+				 }
+				 else
+				 {
+					 itemArray[j].style.backgroundColor="";
+				 }
+			 }
+			 i=i+1;
+			 if(i>4)
+			 {
+				 i=0;
+			 }			 
+			 //window.setTimeout("show_img()",2000);			 
+		 }
+		 
+          //第二个函数：定住 和 出现对应背景色	 
+		 function stop_img(divObj)   //this为当前div,所以参数是div对象divObj
+		 {
+			 //把当前启动的定时任务取消:取消指定id的定时任务
+			 window.clearInterval(taskid); 
+			 var divId=divObj.id  //item_0;
+			 var strArray=divId.split("_");  //["item","0"]
+			 i=parseInt(strArray[1]);  //1 代表下标，即"0"  所以i有item_0 1 2 3 4 四个值
+			 
+			 var imgObj=document.getElementById("img");
+			 imgObj.src=imgArray[i];
+			 
+			 //获取所有图片对应数字
+			 var itemArray=document.getElementsByName("itemdv");
+			 for(var j=0;j<itemArray.length;j++)
+			 {
+				 if(j==i)
+				 {
+					 itemArray[j].style.backgroundColor="gray";
+				 }
+				 else
+				 {
+					 itemArray[j].style.backgroundColor="";
+				 }
+			 }
+			 i=i+1;		 
+		 }
+		//重新启用函数	 
+		 function re_run()
+		 {
+			 taskid=window.setInterval("show_img()",2000);
+		 }
+         //任务：window.setInterval("show_img()",2000);	 
+		 var taskid=window.setInterval("show_img()",2000); 
+		          //2秒后调用该函数，实现了调用函数的功能
+		 //window.onload=show_img;
+	
+	     //赛车移动函数
+	      var x1=210;
+		  var y1=10;
+		  var x2=210;
+		  var y2=110;
+		  var x3=210;
+		  var x4=210;
+		  var y4=335;
+		  var x5=210;
+		  var directionx1=true;
+		  var directiony1=true;
+		  var directionx2=false;
+		  var directiony2=true;
+		  var directionx3=true;
+		  var directionx4=true;
+		  var directiony4=false;
+		  var directionx5=false;
+		  function advice_move()
+		  {		  
+			  var movediv1=document.getElementById("div_move1");
+			  var movediv2=document.getElementById("div_move2");
+			  var movediv3=document.getElementById("div_move3");
+			  var movediv4=document.getElementById("div_move4");
+			  var movediv5=document.getElementById("div_move5");
+			  movediv1.style.display="block";
+			  movediv2.style.display="block";
+			  movediv3.style.display="block";
+			  movediv4.style.display="block";
+			  movediv5.style.display="block";
+			  var w=document.body.clientWidth;  //设置用户可见页面宽度
+			  var h=document.body.clientHeight; //设置用户可见页面高度
+			  //1---------------------------------------
+			  if(x1+140>w)
+			  {
+				  directionx1=false;
+			  }
+			  if(y1+140>h)
+			  {
+				  directiony1=false;
+			  }
+			  if(x1<=0)
+			  {
+				  directionx1=true;
+			  }
+			  if(y1<=0)
+			  {
+				  directiony1=true;
+			  }
+			  if(directionx1)
+			  {
+				  x1=x1+10;
+			  }
+			  else
+			  {
+				  x1=x1-10;
+			  }
+			  if(directiony1)
+			  {
+				  y1=y1+5;
+			  }
+			  else
+			  {
+				  y1=y1-5;
+			  }
+			  //2-------------------------------------------------
+			  if(x2+200>w)
+			  {
+				  directionx2=false;
+			  }
+			  if(y2+100>h)
+			  {
+				  directiony2=false;
+			  }
+			  if(x2<=0)
+			  {
+				  directionx2=true;
+			  }
+			  if(y2<=0)
+			  {
+				  directiony2=true;
+			  }
+			  if(directionx2)
+			  {
+				  x2=x2+15;
+			  }
+			  else
+			  {
+				  x2=x2-8;
+			  }
+			  if(directiony2)
+			  {
+				  y2=y2+8;
+			  }
+			  else
+			  {
+				  y2=y2-15;
+			  }
+			  //3-----------------------------------
+			  if(x3+100>w)
+			  {
+				  directionx3=false;
+			  }
+			  if(x3<=0)
+			  {
+				  directionx3=true;
+			  }
+			  if(directionx3)
+			  {
+				  x3=x3+30;
+			  }
+			  else
+			  {
+				  x3=x3-20;
+			  }
+		      //4----------------------------------------------------
+			  if(x4+160>w)
+			  {
+				  directionx4=false;
+			  }
+			  if(y4+100>h)
+			  {
+				  directiony4=false;
+			  }
+			  if(x4<=0)
+			  {
+				  directionx4=true;
+			  }
+			  if(y4<=80)
+			  {
+				  directiony4=true;
+			  }
+			  if(directionx4)
+			  {
+				  x4=x4+25;
+			  }
+			  else
+			  {
+				  x4=x4-12;
+			  }
+			  if(directiony4)
+			  {
+				  y4=y4+16;
+			  }
+			  else
+			  {
+				  y4=y4-14;
+			  }
+			  //5----------------------------------------------
+			  if(x5+80>w)
+			  {
+				  directionx5=false;
+			  }
+			  if(x5<=0)
+			  {
+				  directionx5=true;
+			  }
+			  if(directionx5)
+			  {
+				  x5=x5+22;
+			  }
+			  else
+			  {
+				  x5=x5-20;
+			  }
+			  //--------------------------------------------------------
+			  movediv1.style.pixelLeft=x1; //设置div对象距离左边的位置
+			  movediv1.style.pixelTop=y1; //设置div对象距离上边的位置
+			  movediv2.style.pixelLeft=x2; 
+			  movediv2.style.pixelTop=y2;
+			  movediv3.style.pixelLeft=x3;
+			  movediv4.style.pixelLeft=x4; 
+			  movediv4.style.pixelTop=y4;
+			  movediv5.style.pixelLeft=x5;   
+			  window.setTimeout("advice_move()",200);		  
+		  }
+   </script>
+</head>
+
+<body>
+    <!-- 赛车1 -->
+    <div id="div_move1" style="display:none;position:absolute;top:10px;left:210px;z-index:3">
+    	<img src="image/sc1_02.png" />
+    </div>
+    <div id="div_move2" style="display:none;position:absolute;top:110px;left:1210px;z-index:2">
+    	<img src="image/sc2_02.png" />
+    </div>
+    <div id="div_move3" style="display:none;position:absolute;top:185px;left:210px;z-index:1">
+    	<img src="image/sc3_02.png" />
+    </div>
+    <div id="div_move4" style="display:none;position:absolute;top:385px;left:210px;z-index:4">
+    	<img src="image/sc4_02.png" />
+    </div>
+    <div id="div_move5" style="display:none;position:absolute;top:495px;left:1210px;z-index:2">
+    	<img src="image/sc5_02.png" />
+    </div>
+    <!-- 赛车5 -->
+	<div class="div" style="height:90px;padding-top:8px;">
+    	<div style="margin-left:20px;height:80px;"> 
+    	<img src="image/logo1.jpg" width="190" height="90"/> 
+        </div>
+       <div style="position:relative;top:-90;left:220;width:50%;height:90%;">
+           <table width="100%" cellpadding="4">
+            <tr>
+              <td align="left"><a href="#" class="m1">赛车爱好者的"百度文库"</a></td>
+            </tr>
+           	<tr heigth="75%">
+              <td align="center"><font size="5" face="微软雅黑" color="#f9fcff">赛&nbsp;&nbsp;车&nbsp;&nbsp;风&nbsp;&nbsp;云&nbsp;&nbsp;1&nbsp;&nbsp;2&nbsp;&nbsp;3</font></td>
+            </tr>
+            <tr>
+             <td align="right"><a href="#" class="m1">走进喜马拉雅,走进赛车</a></td>
+            </tr>
+           </table>
+        </div> 
+        <div style="position:relative;top:-165;left:625;width:20%;height:90px;">
+        	<img src="image/boshi.jpg" width="160" height="90"/>
+        </div>
+    </div>
+    
+    <!--   ------------------------------------------------  -->
+    <div style="margin:0 auto;width:800px;height:40px;background-color:#695b2c;margin-top:5px;">
+      <form name="timeForm">
+      	 <table width="95%" height="90%"  align="center">
+         	<tr>
+            	<td><font color="#f9fcff">&nbsp;&nbsp;&nbsp;&nbsp;喜马拉雅网</font></td>
+                <td rowspan="2" valign="top"><img src="image/bg1.gif" width="8" height="36"/> </td>
+                <td align="center"><font color="#f9fcff">赛车百事通</font></td>
+                <td rowspan="2" valign="top"><img src="image/bg1.gif" width="8" height="36"/> </td>
+                <td rowspan="2" align="right"><font color="#f9fcff">北京时间:<input type="text" size="30" name="time"/></font></td>
+            </tr>
+            <tr>
+                <td><font color="#f9fcff">一个搬运知识的网站</font></td>
+                <td align="center"><font color="#f9fcff">来喜马拉雅</font> </td>
+            </tr>
+         </table>
+      </form>
+    </div>
+    <!--   ------------------------------------------------  -->
+    
+    <div style="margin:0 auto;width:800px;height:500px;background-color:#f9fcff; margin-top:5px;">
+    
+       <!--   ------------------------------------------------  -->
+       <div style="width:25%;height:450px;background-color:#5a5b5d;margin:5px;">
+       <br/><font size="4" color="#f9fcff">内容精选</font><hr/>
+       	<div style="width:90%;height:85%;background-color:#5a5b5d;margin-left:20px;">
+        <table width="100%" height="350">
+        	<tr>
+              <td bgcolor="#2a4c6f"> <a href="sgestures.html" class="m2" onMouseOver="showmenu4()">&nbsp;赛车术语</a></td>         <td>&nbsp;</td>
+            </tr>
+            <tr height="10"> <td colspan="2">&nbsp;</td> </tr>
+            <tr>
+              <td bgcolor="#2a4c6f"> <a href="sluntan.html" class="m2"  onMouseOver="showmenu5()">&nbsp;赛车论坛</a> </td>        <td>&nbsp;</td>
+            </tr>
+            <tr height="10"> <td colspan="2">&nbsp;</td> </tr>
+            <tr>
+            	<td align="center" width="80%" bgcolor="#2a4c6f"> <a href="playgame.html" class="m2" onMouseOver="showmenu2()">赛车游戏</a> </td>
+                <td> 
+                	<div class="company-hide" id="s2"> 
+                    <a href="playgame.html" class="m3">网络游戏</a> <br/>
+                    <a href="playgame.html" class="m3">单机游戏</a> <br/>
+                	</div> 
+                </td>
+            </tr>
+            <tr height="10"> <td colspan="2">&nbsp;</td> </tr>
+        	<tr>
+            	<td align="center" bgcolor="#2a4c6f"> <a href="sgame.html"class="m2" onMouseOver="showmenu1()">赛车赛事</a> </td>
+                <td> 
+                	<div class="company-hide" id="s1"> 
+                    <a href="sgame.html" class="m3">汽车场地赛</a> <br/>
+                    <a href="sgame.html" class="m3">汽车道路赛</a> <br/>
+                	<a href="sgame.html" class="m3">摩托车大赛</a> <br/>
+                    <a href="sgame.html" class="m3">自行车大赛</a> 
+                	</div> 
+                </td>
+            </tr>
+            <tr height="10"> <td colspan="2">&nbsp;</td> </tr>
+            <tr>
+            	<td align="center" bgcolor="#2a4c6f"> <a href="smovie.html" class="m2" onMouseOver="showmenu3()">赛车电影</a> </td>
+                <td> 
+                	<div class="company-hide" id="s3"> 
+                    <a href="smovie.html" class="m3">国产系列</a> <br/>
+                    <a href="smovie.html" class="m3">海外大片</a> <br/>
+                	</div> 
+                </td>
+            </tr>
+        </table>  
+       </div>
+       <!--   ------------------------------------------------  -->
+       
+       <div style="position:relative;top:-430px;left:215px;width:400px;height:300px;"> 
+       	   <img id="img" src="image/1.jpg" />
+           <div class="numdv">
+         <div class="itemdv" name="itemdv" style="background-color:gray;"
+        onMouseOver="stop_img(this)"
+                    onmouseout="re_run()" id="item_0">1</div>
+               <div class="itemdv" name="itemdv" onMouseOver="stop_img(this)"
+                    onmouseout="re_run()" id="item_1">2</div>
+               <div class="itemdv" name="itemdv" onMouseOver="stop_img(this)"
+                    onmouseout="re_run()" id="item_2">3</div>
+               <div class="itemdv" name="itemdv" onMouseOver="stop_img(this)"
+                    onmouseout="re_run()" id="item_3">4</div>
+               <div class="itemdv" name="itemdv" onMouseOver="stop_img(this)"
+                    onmouseout="re_run()" id="item_4">5</div>         
+           </div>
+       </div>
+       <!--  --------------------------------------------------   -->
+       <div style="position:relative;top:-732px;left:620px;background-color:#4a6a5b;width:175px;height:300px;">
+          <form action="onkey_game.html" method="post" >
+       	  <table width="95%" height="95%">
+          	<tr height="20"> <td><font color="#f9fcff" size="6">梦幻之旅</font></td> </tr>
+            <tr> 
+               <td valign="top">
+                 <img src="image/ff1.gif" /><a class="m1" href="#">introducation</a> 
+                  <textarea cols="15" rows="9">
+                  此版块，完成一场寻宝旅途!您将进入一个神秘的国度，在充满魔法的森林自由穿梭,寻找世界上第一辆赛车。开始寻宝之旅,请点击    已阅读 
+               </textarea> <p></p>&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="已阅读">
+               </td>
+            </tr>
+          </table>
+          </form>
+       </div>
+       <!--  ------------------------------------------- -->
+       <div style="position:relative;top:-725px;left:215px;width:580px;height:140px;background-image:url(image/park.jpg)">
+          <table width="100%" height="100%" border="1" cellpadding="5">
+             <tr>
+                <td align="right" valign="top"> <img src="image/ff2.gif" />&nbsp;<button onclick="advice_move()">赛车秀</button></font></td>
+             </tr>
+          </table>
+       </div>
+    </div>
+</body>
+</html>

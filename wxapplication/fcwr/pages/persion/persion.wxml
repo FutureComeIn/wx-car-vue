@@ -1,0 +1,16 @@
+<!--pages/persion/persion.wxml-->
+<view>
+<text># 微信小程序-撒拉嘿you</text>
+<text>感谢莅临小程序的各位老板</text>
+<text>...hahaha</text>
+<text>### 概述</text>
+<text>* 数据来源:网络</text>
+<text>* 开发工具:微信开发者工具v1.02.1803210</text>
+<text>* 开发初衷:兴趣</text>
+<text>************袁布什 2018.10.7************</text>
+<view>
+    <button bindtap="callme">电话咨询</button>
+    <button bindtap="wxme">在线咨询</button> 
+</view>
+<text>音频、video换成自己的素材还在寻找办法解决 </text>
+</view>

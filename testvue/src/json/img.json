@@ -1,0 +1,13 @@
+"linkerImg":[{
+  "src":"../static/1.jpg",
+  "webUrl":"",
+  "goWeb":true
+}, {
+"src":"../static/2.jpg",
+"webUrl":"",
+"goWeb":true
+}, {
+"src":"../static/3.jpg",
+"webUrl":"",
+"goWeb":true
+}]

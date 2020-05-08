@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>完善地址信息</title>
+    <script language="javascript">
+	    //ie浏览器不能实现该功能
+		window.onload=add_province;  //网页装载完毕调用函数
+		
+		var provinceArray=new Array("--请选择--","湖南","江西","广东"); //创建省份对象数组
+		
+		//创建城市对象数组
+		var cityArray=new Array();
+		cityArray[0]=new Array("--请选择--","","");
+		cityArray[1]=new Array("衡阳","长沙","岳阳");
+		cityArray[2]=new Array("宜春","九江","南昌");
+		cityArray[3]=new Array("东莞","佛山","广州");
+		
+		function add_province()
+		{
+			var proObj=document.getElementById("pro");  //获取省份id
+			for(var i=0;i<provinceArray.length;i++)    //创建option对象，并为其属性value、innerHTML赋值
+			{
+				var optObj=document.createElement("option");  //创建对象--option
+				optObj.innerHTML=provinceArray[i];            //赋值
+				optObj.value=provinceArray[i];
+				
+			    //创建对象-option、并赋值后，为其注入值--使用select标签的add方法
+				proObj.add(optObj);
+			}		
+		}
+		
+		
+		function add_city()
+		{
+			
+			//获取省级下拉列表框的下标（即你选择的provinceArray[i]）
+			var proObj=document.getElementById("pro");
+			var proIndex=proObj.selectedIndex;
+			//alert(proIndex);
+		    
+			var cityObj=document.getElementById("city");  //获取城市id
+			
+			cityObj.length=0;  //删除城市下拉列表框里所有option的值         有点难理解
+			
+			/*if(proIndex==0)
+			{
+				return;     //如果选择  --请选择--  ，city对象不显示option
+			}*/
+			
+			var cityIndex=proIndex;  //定义cityArray的下标；
+			var cityArray2=cityArray[cityIndex];  //cityArray2代表二维数组的值
+			
+			//创建cityArray2的option对象，并为其属性value、innerHTML赋值
+			for(var j=0;j<cityArray2.length;j++) //创建option对象，并为其属性value、innerHTML赋值
+			{
+				
+				var optObj=document.createElement("option"); //创建对象--option				
+				optObj.innerHTML=cityArray2[j]; //赋值
+				optObj.value=cityArray2[j];
+				
+				 //创建对象-option、并赋值后，为其注入值--使用select标签的add方法
+				 cityObj.add(optObj);
+			}		
+		}
+		
+		function closed()
+		{
+			alert("补充地址完成");
+			setTimeout("javascript:location.href='sluntan.html'",500);
+			close();
+		}
+	 </script>
+</head>
+
+<body>
+     <div style="width:300px;height:150px;text-align:center;margin:0 auto;background-image:url(image/abg.jpg)">
+	   <form method="post" action="#">
+         <table width="100%" height="100%">
+            <tr bgcolor="#99CC99">  
+                <td colspan="2">为了更好的提供服务,请您完善地址信息 </td>
+            </tr>
+            <tr>
+               <td align="right">省份：<select id="pro" onChange="add_city()"> </select> </td>
+  			  <td> 城市：<select id="city"> <option>--请选择--</option> </select></td>
+            </tr>
+            <tr>
+               <td colspan="2" align="center">
+                 <input type="button" value="提交" onClick="closed()" /> 
+               </td>
+            </tr>
+         </table>
+        
+     </form>
+     </div>
+</body>
+</html>

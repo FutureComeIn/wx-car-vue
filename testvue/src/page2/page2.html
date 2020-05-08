@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>新增入口2</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+<body>
+   <!--多页面配置：https://github.com/Fatty-Shu/vue-multi-entry-->
+  <div id="app"></div>
+   <div id="app2">
+     <p>混入 (mixins)：定义可复用的方法或者计算属性。混入对象可包含任意组件选项。
+             当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。</p>
+
+     <p>发Ajax请求的一个插件: Axios 是一个基于 Promise 的 HTTP 库，可以用在浏览器和 node.js 中<br/>
+       {{ info }}
+     </p>
+   </div>
+</body>
+<script>
+  var mixin = {
+    created: function () {
+      document.write('混入调用【1、当组件和混入对象含有同名选项时，这些选项将以恰当的方式混合】' + '<br>')
+    },
+    methods: {
+      hellworld: function () {
+        document.write('HelloWorld 方法' + '<br>');
+      },
+      samemethod: function () {
+        document.write('Mixin：相同方法名' + '<br><br>');
+      }
+    }
+  }
+  // 全局混入：为自定义的选项 'myOption' 注入一个处理器。
+  Vue.mixin({
+    created: function () {
+      var myOption = this.$options.myOption
+      if (myOption) {
+        document.write(myOption)
+      }
+    }
+  })
+
+  var vm = new Vue({
+    el: '#app2',
+    mixins: [mixin],
+    created: function () {
+      document.write('组件调用' + '<br><br>')
+    },
+    methods: {
+      start: function () {
+        document.write('start 方法' + '<br>');
+      },
+      samemethod: function () {
+        document.write('Main：相同方法名 【2、methods选项中有相同的函数名，则Vue实例优先级会较高】' + '<br><br>');
+      }
+    },
+    myOption: '3、全局混入：为自定义的选项 myOption 注入一个处理器<br><br>',
+
+    data() {
+      return {
+        info: null
+      }
+    },
+    mounted() {
+      axios.get('https://www.runoob.com/try/ajax/json_demo.json', {header: {"Access-Control-Allow-Origin": "*"}}, {dataType: 'JSONP'})
+        .then(response => (this.info = response))
+        .catch(function (error) {
+          console.log(error);   // 请求失败处理
+        });
+    }
+  });
+  vm.hellworld();
+  vm.start();
+  vm.samemethod();
+
+</script>
+</html>

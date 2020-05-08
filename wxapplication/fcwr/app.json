@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/persion/persion",
+    "pages/join/join",
+    "pages/showVcr/showVcr"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "撒拉嘿you",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#56abe4",
+    "backgroundColor": "#ddd",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/city1.png",
+        "selectedIconPath": "images/tabbar/city2.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/join/join",
+        "iconPath": "images/tabbar/weather1.png",
+        "selectedIconPath": "images/tabbar/weather2.png",
+        "text": "加入"
+      },
+      {
+        "pagePath": "pages/persion/persion",
+        "iconPath": "images/tabbar/about1.png",
+        "selectedIconPath": "images/tabbar/about2.png",
+        "text": "说明"
+      }
+    ],
+    "position": "buttom"
+  }
+}

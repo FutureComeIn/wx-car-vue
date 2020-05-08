@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>赛车游戏</title>
+    <style>
+	   body{overflow-x:hidden;}
+	   div{margin:0 auto;}
+	</style>
+    <script language="javascript">
+		function withFloat()
+	    {
+		   var gamefloat=document.getElementById("gamefloat");
+                   //alert(leftfloat.style.pixelTop);
+		   var top=document.body.scrollTop;  //获取页面内容下滑高度
+		   gamefloat.style.top=top+2;
+	    }
+	   //当前窗口网页滚动事件 
+	   window.onscroll=withFloat;
+	</script>
+</head>
+
+<body>
+	<div id="gamefloat" style="position:absolute;left:10px;top:10px;">
+       <img src="image/game5.jpg" />
+    </div>
+	<div style="width:100%;height:50px;">
+      &nbsp;
+    </div>
+    
+   	<div style="width:80%;height:35px;text-align:center;background-image:url(image/gametitle.jpg)">
+       
+    </div>
+    <div style="border:1 #CCF solid;width:64%;height:15px;">
+    	喜马拉雅推荐-->赛车
+    </div>
+    <div style="width:80%;height:240px;background-color:#FFF;margin-top:5px;text-align:center;">
+        <table width="100%" height="100%" cellpadding="5" bgcolor="#CCCCFF">
+           <tr> 
+              <td style="background-color:#FFC;border-top:2 skyblue solid;font-size:20px;">  最新赛车游戏 </td>
+              <td> 热门网络赛车游戏推荐 </td>
+           </tr>
+           <tr> 
+              <td><img src="image/game2.jpg" /> </td>
+              <td><img src="image/qqfly.jpg" /> </td>
+           </tr>
+        </table> 
+       
+    </div>
+    
+   
+    
+    <div style="width:80%;height:380px;background-color:#FFF;margin-top:45px;text-align:center;">
+        <table width="100%" height="100%" cellpadding="5" bgcolor="#CCCCFF">
+           <tr> 
+              <td style="background-color:#FFC;border-top:2 skyblue solid;font-size:20px;"> 最多人玩 </td>
+              <td> 赛车游戏排行 </td>
+           </tr>
+           <tr> 
+              <td><img src="image/game3.jpg" /> </td>
+              <td><img src="image/game4.jpg" /> </td>
+           </tr>
+        </table> 
+    </div>
+    
+    <div style="width:80%;margin-top:45px;">
+      <img src="image/game6.jpg" />
+    </div>
+</body>
+</html>

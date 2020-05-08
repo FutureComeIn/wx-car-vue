@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>赛车电影</title>
+    <style>
+	  
+	</style>
+    
+    <script language="javascript">
+	   //图片轮播--------------------------------------------------------------
+   		 var imgArray=new Array();
+		 imgArray[0]="image/sm1.jpg";
+		 imgArray[1]="image/sm2.jpg";
+		 imgArray[2]="image/sm3.jpg";
+		 imgArray[3]="image/sm4.jpg";
+		 imgArray[4]="image/sm5.jpg";
+		 var i=1;  //i=0
+       //第一个函数：图片轮播 和 出现对应背景色
+		 function show_img()
+		 {
+			 var imgObj=document.getElementById("img");
+			 imgObj.src=imgArray[i];
+			 //获取所有图片对应数字
+			 i=i+1;
+			 if(i>4)
+			 {
+				 i=0;
+			 }			 
+			 window.setTimeout("show_img()",2000);			 
+		 }
+		 //开启音乐
+		 function openmusic()
+		 {
+			 var openmusic=document.getElementById("openmusic");
+			 openmusic.style.display="block";
+		 }
+	</script>
+</head>
+
+<body>
+    <!--
+	<video width="300" height="300" controls autoplay>
+      <source src="image/war.mp4" type="video/mp4"/>
+      Your browser does not support the <video> element
+    </video>
+    -->
+   <div style="width:70%;height:50px;background-color:red;text-align:center;margin:0 auto;">
+       <table width="100%" height="100%"> 
+           <tr>
+              <td>
+                  <font size="5" color="#f9fcff">喜马拉雅</font> <br/>
+              </td>
+              <td align="right">
+              	赛车电影精选&nbsp;&nbsp;&nbsp;&nbsp;
+              </td>
+              <td width="650" valign="top">
+                  <img src="image/sm7.jpg"/>
+              </td>
+              <td>
+                 <button onclick="show_img()" style="cursor:pointer;color:#FFFFFF">双击666</button>
+               </td>
+           </tr>
+       </table>
+   </div>
+   <hr/>
+   <div style="width:70%;height:590px;border:1 red solid;margin:0 auto;">
+       <div style="width:480px;height:590px;background-color:#999;">
+            <img id="img" src="image/sm1.jpg" />
+       </div>
+       <div style="position:relative;top:-590px;left:500px;width:440px;height:560px;background-color:red;">
+       <table width="100%" height="100%">
+         <tr> 
+           <td colspan="2"> <font size="5" color="#f9fcff">电影推荐</font><br/> </td>
+         </tr>
+         <tr> 
+           <td><img src="image/sm8.jpg" width="440" height="560"/> </td>
+           <td>
+           <button style="color:red;font-size:20px;cursor:pointer;" onclick="openmusic()">点我点我有惊喜</button>
+           </td>
+         </tr>
+       </table>
+        
+        
+        
+       </div>
+   </div>
+   
+   
+   <div  style="width:70%;height:55px;margin:0 auto;background-image:url(image/sun1.jpg);">
+      <div id="openmusic" style="display:none;width:100%;height:100%"s>
+      <table width="100%" height="100%" >
+         <tr>
+            <td width="60"> <font size="5" color="#f9fcff">音乐串烧</font></td>
+            <td>we are the champions
+       <embed src="image/Queen - We Are the Champions.mp3"  autostart="false" loop="false"/>
+            </td>
+             <td>F1引擎轰鸣
+       <embed src="image/2447.mp3"  autostart="false" loop="false"/>
+            </td>
+            <td>头文字D-漂移
+       <embed src="image/漂移 - 周杰伦.mp3"  autostart="false" loop="false"/>
+            </td>
+         </tr>
+      </table>
+      </div>
+   </div>
+</body>
+</html>

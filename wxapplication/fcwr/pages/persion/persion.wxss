@@ -1,0 +1,17 @@
+/* pages/persion/persion.wxss */
+view{
+    margin-left:30rpx;
+}
+text{
+    display:block;
+    line-height:100rpx;
+}
+view{
+  overflow: hidden;
+}
+button{
+  float:left;
+  width:35%;
+  height:90rpx;
+  margin-left:50rpx;
+}

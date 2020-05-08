@@ -1,0 +1,48 @@
+/* pages/index/index.wxss */
+swiper{
+    width:100%;
+    height:300rpx;
+}
+swiper image{
+    display:block;
+    width:100%;
+    height:100%
+}
+
+/*item-list*/
+.pro-item{
+    overflow:hidden;
+    padding:30rpx;
+}
+.pro-image{
+    float:left;
+    height:220rpx;
+    width:230rpx;
+}
+.pro-body{
+    margin-left: 260rpx;
+}
+.pro-title{
+    color:#abab22;
+    font-size:35rpx;
+    line-height: 1;
+}
+.pro-desc{
+    color:#1122aa;
+    font-size:26rpx;
+    line-height:1.2;
+}
+.pro-footer{
+    overflow: hidden;
+}
+.btn-love{
+    float:left;
+    width:100rpx;
+    height:60rpx;
+}
+.btn-vcr{
+    float:left;
+    width:150rpx;
+    height:60rpx;
+    margin-left:30rpx;
+}

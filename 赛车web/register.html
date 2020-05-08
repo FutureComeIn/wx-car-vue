@@ -1,0 +1,278 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>注册页面</title>
+    <style>
+           body{font-size:12px;}
+		  .td1{border-right:1px solid #7Bcc87;}
+          .td{text-align:right; border-left:1px solid #7Bcc87;}
+		  .button{background-image: url(image/reg1-button.gif);background-repeat:no-repeat;height: 30px;width: 60px; }
+    </style>
+    
+    
+    <script language="javascript">
+	      function checkKongGe(str)  //判断字符是否全为空 函数
+		  {
+			  var kongge=0;
+			  for(var i=0;i<str.length;i++)
+			  {
+				  if(str.charAt(i)==' ')  //charAt(i) 获得字符串的单个字符
+				  kongge++;
+			  }
+			  if(kongge==str.length)
+			  {
+				  return true;
+			  }
+			  else
+			  {
+				  return false;
+			  }
+		  }
+		  
+		  function check_psw(pass)  //判断密码是否合格函数
+		  {
+			 var flag=true;
+			 for(var i=0;i<pass.length;i++)
+			 {
+				 var temp=pass.charAt(i);
+				 if((temp<='9'&&temp>='0')||(temp>='a'&&temp<='z')||(temp>='A'&&temp<='Z'))
+				 {
+					 continue;
+				 }
+				 else
+				 {
+					 flag=false;
+					 break;
+				 }
+			 }
+			 return flag;  //表示符合规范
+		  }
+		  
+		 
+		  function checkData()  //判断所有步骤信息是否合格函数
+		  {
+			   //判断用户名是否合格部分
+			   var name=document.myform.nickname.value;
+			   if(name.length==0)
+			   {
+				   alert("用户名不能为空！");
+				   return false;
+			   }
+			   if(checkKongGe(name))
+		       {
+			     alert("用户名不能全部为空格!");
+			     return false;
+		       }
+			   
+			   
+			   //判断密码部分
+			   var psw=document.myform.psw.value;
+			   if(psw.length==0)
+			   {
+				   alert("密码不能为空!");
+				   return false;
+			   }
+			   if(psw.length<6)
+			   {
+				   alert("密码不能少于6位！");
+				   return false;
+			   }
+			   if(checkKongGe(psw))
+			   {
+				   alert("密码不能全部为空格！");
+				   return false;
+			   }
+			   if(!check_psw(psw))
+			   {
+				   alert("密码只能由数字、字母、下划线组成！");
+				   return false;
+			   }
+			   
+			   //判断确认密码框
+			   var insurePsw=document.myform.pswa.value;
+			   if(insurePsw!=psw)
+			   {
+				   alert("两次密码输入不一致！");
+				   return false;
+			   }
+			   
+			   //判断邮箱
+			   var post=document.myform.email.value;
+			   if(post.length==0)
+			   {
+				   alert("邮箱不能为空！");
+				   return false;
+			   }
+			   if(checkKongGe(post))
+			   {
+				   alert("邮箱不能全为空格!");
+				   return false;
+			   }
+			   var avalue=post.indexOf("@");
+			   var dvalue=post.indexOf(".");
+			   if(avalue==-1||avalue!=post.lastIndexOf("@"))   //@有且唯一
+			   {
+				   alert("@有且唯一");
+				   return false;		   
+			   }
+			   if(avalue+1>=dvalue)
+			   {
+				   alert("@与.的至少隔2个位置！");
+				   return false;
+			   }
+			   if(dvalue==-1||dvalue==(post.length-1))
+			   {
+				 alert(".号不为空且不能在最后！");  
+				 return false;
+			   }
+			   
+			   //判断下拉列表问题框
+			   var selIndex=document.myform.question.selectedIndex;  //获取下拉列表框的下标
+			   if(selIndex==0)
+			   {
+				   alert("请选择问题！");
+				   return false;
+			   }
+			   
+			   //判断回答框
+			   var answer=document.myform.anwser.value;
+			   if(answer.length==0)
+			   {
+				   alert("回答不能为空！");
+				   return false;
+			   }
+			   if(checkKongGe(answer))
+			   {
+				   alert("回答不能全部为空格！");
+				   return false;
+			   }
+		       if(selIndex==1)
+			   {
+				   if(answer=="蓝翔技校")
+				   {
+					   
+				   }
+				   else
+				   {
+					   alert("您的回答不正确，请重新输入！");
+					   return false;
+				   }
+				   
+			   }
+			   if(selIndex==2)
+			   {
+				   if(answer=="10月1号"||answer=="10.1"||answer=="10月1日")
+				   {
+					   
+				   }
+				   else
+				   {
+					   alert("您的回答不正确，请重新输入！");
+					   return false;
+				   }			   
+			   }
+			   //其它问题省略
+			   
+			   
+			   
+			   
+			   
+			   //判断文本域
+			   var introduce=document.myform.introduce.value;
+			   if(checkKongGe(introduce)||introduce.length==0)
+			   {
+				   alert("自我介绍不能为空！");
+				   return false;
+			   }
+			   
+			   
+			   alert("注册成功！"); 
+			   window.showModalDialog("login.html","登录","dialogWidth:700px;dialogHeight:600px;");
+			   close();
+			   //return true;   //onsubmit="return checkData()",checkData()返回true才执行跳转页面
+			   
+		  }
+		  
+		  
+	   </script>
+</head>
+
+<body>
+    <div style="background-color:#CCC;width:700px;height:600px;margin:0 auto; text-align:center;"> 
+    	<form action="#" method="post" name="myform" onSubmit="return checkData()">
+          <table width="100%" align="center" cellspacing="5" cellpadding="5">
+             <tr bgcolor="#66FFFF">
+                <td colspan="2" align="center">喜马拉雅论坛会员注册</td>
+             </tr>
+             <tr>
+                <td  class="td">
+                  用户名：
+                </td>
+                <td width="540" class="td1" ><input type="text" name="nickname" /></td>
+             </tr>
+             <tr>
+                <td class="td">
+                  密 &nbsp;码：
+                </td>
+                <td class="td1"><input type="password" name="psw" /> <//td>
+             </tr>
+             <tr>
+                <td class="td">
+                 确认密码：
+                </td>
+                <td class="td1"><input type="password" name="pswa" /></td>
+             </tr>
+             <tr>
+                <td class="td">
+                 Email邮箱：
+                </td>
+                <td class="td1"><input type="text" name="email" /></td>
+             </tr>
+             <tr>
+                <td class="td">
+                提 &nbsp;问：
+                </td>
+                <td class="td1">
+                  <select name="question">
+                      <option>-=请您选择=-</option>
+                      <option>我的出生地点是哪里？</option>
+                      <option>我的生日是什么？</option>
+                      <option>我的女朋友叫什么？</option>
+                      <option>我女朋友的生日是什么？</option>
+                      <option>我的父亲叫什么?</option>
+                      <option>我父亲的生日是什么?</option>
+                      <option>我的母亲叫什么?</option>
+                      <option>我母亲的生日是什么?</option>
+                      <option>我的家庭住址是哪里?</option>
+                      <option>我的初恋叫什么?</option>
+                      <option>我最喜欢的宠物是什么?</option>
+                      <option>我最想去的地方是哪里?</option>
+                  </select>
+				</td>
+             </tr>
+             <tr>
+                <td class="td">
+                 回 &nbsp;答：
+                </td>
+                <td class="td1"> <input type="text" name="anwser" /> </td>
+             </tr>
+             <tr>
+                <td class="td">
+                   个人简介:
+                   
+                </td>
+				<td class="td1">
+				  <textarea cols="40" rows="5" name="introduce" > </textarea>
+				</td>
+             </tr>
+             <tr >
+                <td colspan="2" align="center" background="image\reg1-end.jpg" height="63"> 
+				    <input type="submit" value="注 册"  class="button"/> 	 
+				</td>
+             </tr>
+
+          </table>
+       </form>
+    </div>
+</body>
+</html>

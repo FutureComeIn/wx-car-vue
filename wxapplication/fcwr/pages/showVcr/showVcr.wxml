@@ -1,0 +1,15 @@
+<!--pages/showVcr/showVcr.wxml-->
+
+<!--
+<import src="../wxParse/wxParse.wxml"/>
+<template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+-->
+ <video wx:if='{{showOrHidden1}}' class="video" src="{{videoList[0]}}" page-gesture="true" danmu-btn controls >
+ </video>
+ <video wx:if='{{showOrHidden2}}' class="video" src="{{videoList[1]}}" page-gesture="true" danmu-btn controls >
+ </video>
+ <video wx:if='{{showOrHidden3}}' class="video" src="{{videoList[2]}}" page-gesture="true" danmu-btn controls >
+ </video>
+ <video wx:if='{{showOrHidden4}}' class="video" src="{{addVideo}}" page-gesture="true" danmu-btn controls >
+ </video>
+ 

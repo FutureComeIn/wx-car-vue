@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>新增入口1</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+  <style>
+    /*Vue在元素显示与隐藏的过渡中: 提供v-enter、v-enter-active、v-enter-to、v-leave、v-leave-active、v-leave-to 6个class来切换
+      使用<transition>，类名的默认前缀为 v-。使用<transition name="fade">，那么 v-enter 会替换为 fade-enter
+           opacity：不透明度样式。从 0.0 （完全透明）到 1.0（完全不透明）
+           transition ：过渡样式（transition: opacity 2s，应用于不透明度属性的过渡效果，时长为2秒）
+    */
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 2s
+    }
+    /* .v-enter-to 、 .v-leave-to, 2.1.8版及以上 */
+    .fade-enter, .fade-leave-to {
+      opacity: 0
+    }
+  </style>
+</head>
+<body>
+   <!--多页面配置：https://github.com/Fatty-Shu/vue-multi-entry-->
+  <div id="app"></div>
+
+   <div id="app2">
+     <runoob></runoob>
+     <runoob_child></runoob_child>
+
+     <prop_component message="静态prop：prop是父组件用来传递数据的一个自定义属性,prop 是单向绑定的,
+                                  当父组件的属性变化时，将传导给子组件，但是不会反过来。"></prop_component>
+
+     <div>
+       <input v-model="parentMsg" size="100">
+       <br>
+       <prop_component v-bind:message="parentMsg"></prop_component>
+     </div>
+
+     <div><input v-focus placeholder="页面载入时，input 元素自动获取焦点" size="100"></div>
+     <div v-runoob="{ color: 'green', text: '菜鸟教程!' }"></div>
+
+     <div>
+       <button v-on:click = "show = !show">vue 过度 & 动画</button>
+       <!-- 内置的过渡封装组件，该组件用于包裹要实现过渡效果的组件  -->
+       <transition name = "fade">
+         <p v-show = "show" v-bind:style = "styleobj">动画实例</p>
+       </transition>
+
+       <transition :duration="{ enter: 2000, leave: 2000 }">
+         <p v-if="show">定制显性的过渡持续时间(毫秒)【定制进入和移出的持续时间】</p>
+       </transition>
+
+       <button v-on:click = "show2 = !show2">自定义过渡class</button>
+       <transition name="custom-classes-transition" enter-active-class="animated tada"
+                   leave-active-class="animated bounceOutRight">
+         <p v-if="show2">自定义过渡类名优先级高于普通类名，这能很好的与第三方（如：animate.css）动画库结合使用</p>
+       </transition>
+
+
+     </div>
+   </div>
+</body>
+<script>
+
+  // 组件注册
+  Vue.component('runoob', {
+    template: '<p>全局组件runoob</p>'
+  })
+  var Child = {
+    template: '<p>局部组件runoob_child，将只在父模板可用</p>'
+  }
+
+  Vue.component('prop_component', {
+    props: ['message'],
+    template: '<p>{{ message }}</p>'
+  })
+
+  //不需要其他钩子函数，可以简写函数，接受所有合法的 JavaScript 表达式，以下实例传入了 JavaScript 对象
+  Vue.directive('runoob', function (el, binding) {
+    // 简写方式设置文本及背景颜色
+    el.innerHTML = binding.value.text
+    el.style.backgroundColor = binding.value.color
+  })
+
+  // 创建根实例
+  new Vue({
+    el: '#app2',
+    data: {
+      parentMsg: '动态 Prop：v-bind 动态绑定 props 的值到父组件的数据',
+      show:true,
+      show2:true,
+      styleobj :{
+        fontSize:'30px',
+        color:'red'
+      }
+    },
+    components: {
+      'runoob_child': Child
+    },
+    directives: {
+      // 注册一个局部的自定义指令 v-focus
+      //钩子函数:bind、inserted、update、componentUpdated、unbind
+      //钩子函数参数：name、value、oldValue、expression、arg、modifiers、vnode
+      focus: {
+        inserted: function (el) {
+          el.focus()
+        }
+      }
+    }
+  })
+
+</script>
+</html>

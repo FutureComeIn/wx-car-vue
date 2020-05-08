@@ -1,0 +1,59 @@
+<!--pages/join/join.wxml-->
+<text>填写信息</text>
+<view class="all">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <label>显示定位(positive)</label>
+    <switch bindtap="moveToLocation" name="positive"/>
+    <map id="myMap" show-location wx:if="{{isShow}}" />
+
+
+    <view>
+    <label>范围(range)(km)</label>
+    <slider name="distance" show-value ></slider>
+    </view>
+
+    <label>昵称(nickname)</label>
+    <input name="nickname" placeholder="nickname" />
+    <label>身高(height)(cm)</label>
+    <input name="height" placeholder="height" />
+    <picker name="work" bindchange="changeWork" 
+            value="{{windex}}" range="{{workArray}}">
+          <label>职业(work)</label>   {{workArray[windex]}}
+    </picker>
+    <picker name="controy" bindchange="changeControy" 
+            value="{{index}}" range="{{array}}">
+          <label>国籍(controy)</label>   {{array[index]}}
+    </picker>
+    
+
+    <radio-group name="sex">
+      性别(sex)
+      <radio value="radio1"/>男(man)
+      <radio value="radio2"/>女(woman)
+    </radio-group>
+  
+  
+    <label>兴趣(interests)</label>
+    <checkbox-group name="interests">
+      <checkbox value="checkbox1"/>唱歌(sing)
+      <checkbox value="checkbox2"/>运动(sport)
+      <checkbox value="checkbox2"/>阅读(read)
+    </checkbox-group>
+    <view>
+    <image src="{{img}}" wx:if="{{type==2}}" />
+    <label catchtap='camera'>选择头像(photo)</label>
+    </view>
+
+    <view>
+    <video src="{{video}}" wx:if="{{vtype==2}}" />
+    <label catchtap='video'>选择VCR(video)</label>
+    </view>
+    
+
+  <view >
+    <button  formType="submit">Submit</button>
+    <button  formType="reset">Reset</button>
+  </view>
+</form>
+
+</view>
